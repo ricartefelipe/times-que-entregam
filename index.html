@@ -1,897 +1,431 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Times que Entregam: Liderança Técnica — Felipe Ricarte</title>
-  <meta name="description" content="O guia definitivo para líderes técnicos que querem construir times de alta performance sem microgerenciar." />
-  <style>
-    :root {
-      --bg: #0d0f14;
-      --bg2: #13161e;
-      --bg3: #1a1e2a;
-      --accent: #4f7cff;
-      --accent2: #7c9fff;
-      --text: #eaedf4;
-      --muted: #7a8099;
-      --border: rgba(255,255,255,0.07);
-      --success: #3ecf8e;
-      --danger: #ff5c5c;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      line-height: 1.6;
-      font-size: clamp(15px, 1.6vw, 17px);
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    /* ── NAVBAR ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(13, 15, 20, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 clamp(1rem, 5vw, 4rem);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-    }
-
-    .nav-brand {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--accent2);
-      letter-spacing: 0.02em;
-    }
-
-    .cta-primary {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 0.55rem 1.2rem;
-      border-radius: 8px;
-      transition: opacity 0.2s, transform 0.15s;
-      white-space: nowrap;
-    }
-
-    .cta-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-
-    /* ── HERO ── */
-    .hero {
-      padding: clamp(4rem, 10vw, 8rem) clamp(1rem, 5vw, 4rem);
-      max-width: 860px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      background: rgba(79, 124, 255, 0.12);
-      color: var(--accent2);
-      border: 1px solid rgba(79, 124, 255, 0.25);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.35rem 0.9rem;
-      border-radius: 99px;
-      margin-bottom: 1.8rem;
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1.4rem;
-      letter-spacing: -0.02em;
-    }
-
-    .hero h1 em {
-      font-style: normal;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: var(--muted);
-      max-width: 640px;
-      margin: 0 auto 2.4rem;
-      line-height: 1.7;
-    }
-
-    .hero-cta-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 3rem;
-    }
-
-    .cta-hero {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-weight: 800;
-      font-size: 1.05rem;
-      padding: 1rem 2.2rem;
-      border-radius: 10px;
-      transition: opacity 0.2s, transform 0.15s;
-      box-shadow: 0 4px 32px rgba(79, 124, 255, 0.3);
-    }
-
-    .cta-hero:hover { opacity: 0.9; transform: translateY(-2px); }
-
-    .price-note {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .price-note strong { color: var(--text); }
-
-    /* MOCKUP */
-    .book-mockup {
-      width: clamp(180px, 30vw, 280px);
-      margin: 0 auto;
-      background: linear-gradient(145deg, #1a2240, #0d0f1a);
-      border-radius: 6px 14px 14px 6px;
-      padding: 2.5rem 2rem;
-      border-left: 6px solid var(--accent);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6), -4px 0 0 rgba(79,124,255,0.4);
-      text-align: left;
-    }
-
-    .book-mockup .book-series {
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent2);
-      margin-bottom: 1rem;
-    }
-
-    .book-mockup .book-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 0.4rem;
-    }
-
-    .book-mockup .book-sub {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-
-    .book-mockup .book-author {
-      font-size: 0.68rem;
-      color: var(--muted);
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
-    }
-
-    /* ── DOR ── */
-    section { padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 4rem); }
-
-    .section-inner { max-width: 1000px; margin: 0 auto; }
-
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.8rem;
-    }
-
-    .section-title {
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 0.8rem;
-      letter-spacing: -0.01em;
-    }
-
-    .section-desc {
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.7;
-      margin-bottom: 2.5rem;
-    }
-
-    .pain-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-
-    .pain-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-    }
-
-    .pain-icon {
-      font-size: 1.6rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .pain-card h3 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .pain-card p {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* ── PARA QUEM ── */
-    .para-quem { background: var(--bg2); }
-
-    .checks {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 0.75rem;
-      margin-top: 2rem;
-    }
-
-    .check-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      padding: 1rem 1.2rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-    }
-
-    .check-icon {
-      color: var(--success);
-      font-size: 1rem;
-      margin-top: 2px;
-      flex-shrink: 0;
-    }
-
-    .check-item p { font-size: 0.9rem; line-height: 1.5; }
-
-    /* ── CONTEUDO ── */
-    .chapters-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 0.75rem;
-      margin-top: 2rem;
-    }
-
-    .chapter-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.1rem 1.3rem;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-
-    .chapter-num {
-      color: var(--accent);
-      font-size: 0.75rem;
-      font-weight: 800;
-      min-width: 28px;
-      padding-top: 2px;
-      letter-spacing: 0.04em;
-    }
-
-    .chapter-text h4 {
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 0.2rem;
-    }
-
-    .chapter-text p {
-      font-size: 0.78rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    /* ── O QUE MUDA ── */
-    .benefits { background: var(--bg2); }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.2rem;
-      margin-top: 2rem;
-    }
-
-    .benefit-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-    }
-
-    .benefit-card .benefit-dot {
-      width: 36px;
-      height: 36px;
-      background: rgba(79, 124, 255, 0.12);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .benefit-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .benefit-card p {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* ── CITAÇÃO ── */
-    .quote-section {
-      text-align: center;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .quote-inner {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .quote-mark {
-      font-size: 4rem;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-
-    blockquote {
-      font-size: clamp(1.1rem, 2.5vw, 1.55rem);
-      font-weight: 600;
-      line-height: 1.5;
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
-
-    blockquote em {
-      font-style: normal;
-      color: var(--accent2);
-    }
-
-    .quote-source {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    /* ── AUTOR ── */
-    .autor-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      display: flex;
-      gap: 2rem;
-      align-items: flex-start;
-      max-width: 700px;
-      margin: 2rem auto 0;
-    }
-
-    .autor-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), #7c3aed);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      flex-shrink: 0;
-    }
-
-    .autor-info h3 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      margin-bottom: 0.2rem;
-    }
-
-    .autor-info .autor-role {
-      font-size: 0.8rem;
-      color: var(--accent2);
-      margin-bottom: 0.8rem;
-    }
-
-    .autor-info p {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* ── PRICING ── */
-    .pricing { text-align: center; }
-
-    .price-card {
-      background: var(--bg2);
-      border: 1px solid rgba(79, 124, 255, 0.3);
-      border-radius: 20px;
-      padding: 2.5rem 2rem;
-      max-width: 440px;
-      margin: 2rem auto 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .price-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-    }
-
-    .price-badge {
-      display: inline-block;
-      background: rgba(62, 207, 142, 0.12);
-      color: var(--success);
-      border: 1px solid rgba(62, 207, 142, 0.25);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.8rem;
-      border-radius: 99px;
-      margin-bottom: 1.2rem;
-    }
-
-    .price-value {
-      font-size: clamp(2.6rem, 6vw, 3.6rem);
-      font-weight: 900;
-      line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-
-    .price-value span {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--muted);
-    }
-
-    .price-desc {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 1.8rem;
-    }
-
-    .price-includes {
-      text-align: left;
-      margin-bottom: 1.8rem;
-    }
-
-    .price-includes li {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.88rem;
-      padding: 0.4rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .price-includes li:last-child { border-bottom: none; }
-
-    .price-includes li::before {
-      content: '✓';
-      color: var(--success);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .cta-price {
-      display: block;
-      background: var(--accent);
-      color: #fff;
-      font-weight: 800;
-      font-size: 1.05rem;
-      padding: 1rem;
-      border-radius: 10px;
-      transition: opacity 0.2s, transform 0.15s;
-      box-shadow: 0 4px 24px rgba(79, 124, 255, 0.35);
-      margin-bottom: 1rem;
-    }
-
-    .cta-price:hover { opacity: 0.9; transform: translateY(-1px); }
-
-    .garantia {
-      font-size: 0.78rem;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem clamp(1rem, 5vw, 4rem);
-      text-align: center;
-    }
-
-    footer p {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    footer a { color: var(--accent2); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
-      .autor-card { flex-direction: column; }
-      .nav-brand { font-size: 0.78rem; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Times que Entregam: Liderança Técnica — Felipe Ricarte</title>
+<meta name="description" content="O guia prático para tech leads que querem times que entregam de verdade. Sem achismo, sem gerenciamento de microdetalhes.">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --bg2: #13161e;
+    --bg3: #1a1e28;
+    --accent: #4f7cff;
+    --accent2: #7c9fff;
+    --text: #eaedf4;
+    --muted: #7a8099;
+    --border: rgba(255,255,255,0.07);
+    --success: #3ecf8e;
+    --danger: #ff5c5c;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    font-size: clamp(15px, 2vw, 17px);
+  }
+
+  /* NAVBAR */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,15,20,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: clamp(10px, 2vw, 16px) clamp(16px, 5vw, 48px);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+  }
+  .nav-brand { font-size: clamp(13px, 2vw, 15px); color: var(--muted); font-weight: 500; }
+  .nav-brand strong { color: var(--text); }
+  .cta-primary {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--accent); color: #fff;
+    padding: clamp(8px, 1.5vw, 12px) clamp(16px, 3vw, 28px);
+    border-radius: 8px; font-weight: 700;
+    font-size: clamp(13px, 1.8vw, 15px);
+    text-decoration: none; white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .cta-primary:hover { background: #3a68ff; transform: translateY(-1px); }
+  .cta-secondary {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: transparent; color: var(--accent2);
+    border: 1.5px solid var(--accent);
+    padding: clamp(8px, 1.5vw, 12px) clamp(16px, 3vw, 28px);
+    border-radius: 8px; font-weight: 600;
+    font-size: clamp(13px, 1.8vw, 15px);
+    text-decoration: none; white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .cta-secondary:hover { background: rgba(79,124,255,0.1); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    padding: clamp(60px, 10vw, 120px) clamp(16px, 6vw, 64px) clamp(60px, 8vw, 100px);
+    max-width: 900px; margin: 0 auto; text-align: center;
+  }
+  .eyebrow {
+    display: inline-block;
+    background: rgba(79,124,255,0.12);
+    color: var(--accent2);
+    border: 1px solid rgba(79,124,255,0.3);
+    padding: 6px 16px; border-radius: 100px;
+    font-size: clamp(11px, 1.5vw, 13px);
+    font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  h1 {
+    font-size: clamp(28px, 5.5vw, 58px);
+    font-weight: 800; line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+  h1 em { color: var(--accent2); font-style: normal; }
+  .hero-sub {
+    font-size: clamp(16px, 2.2vw, 20px);
+    color: var(--muted); max-width: 640px; margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+  .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+  .price-note { font-size: 13px; color: var(--muted); }
+  .price-note strong { color: var(--text); }
+
+  /* BOOK MOCKUP */
+  .mockup-container {
+    margin: 56px auto 0;
+    max-width: 280px;
+  }
+  .book-mockup {
+    background: linear-gradient(135deg, #1a2340 0%, #0d1220 100%);
+    border: 1px solid rgba(79,124,255,0.3);
+    border-radius: 8px;
+    padding: 40px 28px;
+    text-align: center;
+    box-shadow: 0 24px 80px rgba(79,124,255,0.15), 0 0 0 1px rgba(255,255,255,0.05);
+    position: relative;
+  }
+  .book-series { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent2); margin-bottom: 16px; }
+  .book-title { font-size: 22px; font-weight: 800; line-height: 1.2; margin-bottom: 8px; }
+  .book-subtitle { font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+  .book-author { font-size: 12px; color: var(--muted); }
+  .book-vol { position: absolute; top: 12px; right: 16px; background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 100px; }
+  .book-decoration { width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); margin: 0 auto 24px; border-radius: 2px; }
+
+  /* SECTIONS */
+  section { padding: clamp(48px, 8vw, 96px) clamp(16px, 6vw, 48px); }
+  .section-inner { max-width: 960px; margin: 0 auto; }
+  .section-title {
+    font-size: clamp(22px, 4vw, 38px);
+    font-weight: 800; text-align: center;
+    margin-bottom: clamp(32px, 5vw, 56px);
+    letter-spacing: -0.01em;
+  }
+  .section-title em { color: var(--accent2); font-style: normal; }
+
+  /* DOR */
+  .dor-section { background: var(--bg2); }
+  .dor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .dor-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 24px;
+    border-left: 3px solid var(--danger);
+  }
+  .dor-icon { font-size: 28px; margin-bottom: 12px; }
+  .dor-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .dor-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* PARA QUEM */
+  .para-quem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; max-width: 760px; margin: 0 auto; }
+  .check-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 20px;
+  }
+  .check-icon { color: var(--success); font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .check-item p { font-size: 14px; color: var(--text); font-weight: 500; }
+
+  /* CONTEUDO */
+  .content-section { background: var(--bg2); }
+  .chapters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .chapter-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 20px 20px 20px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .chapter-num {
+    min-width: 32px; height: 32px; border-radius: 8px;
+    background: rgba(79,124,255,0.12); color: var(--accent2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800; flex-shrink: 0;
+  }
+  .chapter-card h4 { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.4; }
+
+  /* O QUE MUDA */
+  .beneficios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .beneficio-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px 24px;
+    border-top: 3px solid var(--success);
+  }
+  .beneficio-card .b-icon { font-size: 32px; margin-bottom: 16px; }
+  .beneficio-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+  .beneficio-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+  /* QUOTE */
+  .quote-section { background: var(--bg2); }
+  blockquote {
+    max-width: 700px; margin: 0 auto;
+    border-left: 4px solid var(--accent);
+    padding: 32px 36px;
+    background: var(--bg3);
+    border-radius: 0 12px 12px 0;
+  }
+  blockquote p {
+    font-size: clamp(17px, 2.5vw, 22px);
+    font-weight: 600; line-height: 1.6;
+    color: var(--text);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+  blockquote cite { font-size: 14px; color: var(--muted); font-style: normal; }
+
+  /* AUTOR */
+  .autor-card {
+    max-width: 680px; margin: 0 auto;
+    display: flex; gap: 32px; align-items: flex-start;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 16px; padding: 36px;
+    flex-wrap: wrap;
+  }
+  .autor-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px; font-weight: 800; color: #fff; flex-shrink: 0;
+  }
+  .autor-info h3 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+  .autor-role { font-size: 13px; color: var(--accent2); font-weight: 600; margin-bottom: 14px; letter-spacing: 0.03em; }
+  .autor-bio { font-size: 15px; color: var(--muted); line-height: 1.7; }
+
+  /* PRICING */
+  .pricing-section { background: var(--bg2); }
+  .pricing-card {
+    max-width: 520px; margin: 0 auto;
+    background: var(--bg3); border: 1px solid rgba(79,124,255,0.3);
+    border-radius: 20px; padding: clamp(32px, 5vw, 48px);
+    text-align: center;
+    box-shadow: 0 0 60px rgba(79,124,255,0.08);
+  }
+  .pricing-label { font-size: 12px; color: var(--accent2); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+  .pricing-price { font-size: clamp(44px, 8vw, 64px); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .pricing-price span { font-size: 24px; font-weight: 600; vertical-align: super; margin-right: 2px; }
+  .pricing-desc { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+  .pricing-includes { text-align: left; margin-bottom: 32px; }
+  .pricing-includes h4 { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 14px; }
+  .include-item { display: flex; gap: 10px; align-items: center; font-size: 15px; margin-bottom: 10px; }
+  .include-item .ic { color: var(--success); font-size: 16px; }
+  .pricing-card .cta-primary { width: 100%; justify-content: center; font-size: 17px; padding: 16px; margin-bottom: 16px; }
+  .guarantee { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; justify-content: center; }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg); border-top: 1px solid var(--border);
+    padding: clamp(24px, 4vw, 40px) clamp(16px, 6vw, 48px);
+    text-align: center;
+    font-size: 13px; color: var(--muted);
+  }
+  footer a { color: var(--muted); text-decoration: underline; }
+
+  @media (max-width: 520px) {
+    .autor-card { flex-direction: column; gap: 20px; }
+    .hero-ctas { flex-direction: column; align-items: center; }
+  }
+</style>
 </head>
 <body>
 
 <!-- NAVBAR -->
 <nav>
-  <span class="nav-brand">Times que Entregam: Liderança Técnica</span>
-  <a href="https://pay.kiwify.com.br/yl8FmU0" class="cta-primary" target="_blank">Quero o e-book — R$97 →</a>
+  <div class="nav-brand"><strong>Times que Entregam</strong> &nbsp;·&nbsp; Liderança Técnica</div>
+  <a href="https://pay.kiwify.com.br/yl8FmU0" class="cta-primary" target="_blank">Quero o livro →</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <span class="eyebrow">E-book técnico · Vol. 2 da série Times que Entregam</span>
-
-  <h1>Você vai continuar apagando incêndio<br>
-  — ou vai <em>construir um time que entrega</em><br>sem você estar em tudo.</h1>
-
-  <p class="hero-sub">
-    O guia prático para líderes técnicos e engenheiros sênior que querem delegar com confiança,
-    dar feedback que muda comportamento e criar uma cultura de entrega consistente
-    sem virar o gargalo do time.
-  </p>
-
-  <div class="hero-cta-group">
-    <a href="https://pay.kiwify.com.br/yl8FmU0" class="cta-hero" target="_blank">
-      Quero o e-book agora — R$97 →
-    </a>
-    <p class="price-note">Acesso imediato ao PDF · <strong>Pagamento único</strong></p>
+  <div class="eyebrow">Série Times que Entregam</div>
+  <h1>Seu time vai continuar <em>sem entregar</em>.<br>A não ser que você mude o jeito de liderar.</h1>
+  <p class="hero-sub">O guia prático para tech leads que querem transformar reuniões em produto, débito técnico em decisão consciente, e senioridade em resultado.</p>
+  <div class="hero-ctas">
+    <a href="https://pay.kiwify.com.br/yl8FmU0" class="cta-primary" target="_blank">Quero o livro por R$97 →</a>
+    <a href="#conteudo" class="cta-secondary">Ver os capítulos</a>
   </div>
+  <p class="price-note">Pagamento único &nbsp;·&nbsp; <strong>Acesso imediato em PDF</strong> &nbsp;·&nbsp; Sem assinatura</p>
 
-  <div class="book-mockup">
-    <div class="book-series">Times que Entregam · Vol. 2</div>
-    <div class="book-title">Liderança Técnica</div>
-    <div class="book-sub">Como construir times de alta performance</div>
-    <div class="book-author">Felipe Ricarte Magalhães</div>
+  <div class="mockup-container">
+    <div class="book-mockup">
+      <div class="book-series">Times que Entregam</div>
+      <div class="book-decoration"></div>
+      <div class="book-title">Liderança Técnica</div>
+      <div class="book-subtitle">Como transformar um time que sobrevive<br>em um time que entrega</div>
+      <div class="book-author">Felipe Ricarte</div>
+    </div>
   </div>
 </section>
 
 <!-- DOR -->
-<section>
+<section class="dor-section">
   <div class="section-inner">
-    <div class="section-label">O problema que ninguém fala</div>
-    <h2 class="section-title">Ser o melhor engenheiro do time<br>não te prepara para liderar.</h2>
-    <p class="section-desc">
-      A maioria dos líderes técnicos aprende na raça. E paga um preço alto por isso.
-    </p>
-
-    <div class="pain-grid">
-      <div class="pain-card">
-        <div class="pain-icon">🔥</div>
-        <h3>Você resolve tudo sozinho</h3>
-        <p>Delegar parece mais lento do que fazer. Então você faz. E o time para de crescer enquanto você queima.</p>
+    <h2 class="section-title">Você reconhece <em>alguma dessas situações?</em></h2>
+    <div class="dor-grid">
+      <div class="dor-card">
+        <div class="dor-icon">🔄</div>
+        <h3>Sprint infinito sem progresso</h3>
+        <p>O time está ocupado o tempo todo, mas no final do ciclo pouquíssima coisa foi entregue de verdade.</p>
       </div>
-      <div class="pain-card">
-        <div class="pain-icon">😶</div>
-        <h3>Feedback que não muda nada</h3>
-        <p>Você dá o retorno, a pessoa balança a cabeça e na semana seguinte o mesmo problema aparece de novo.</p>
+      <div class="dor-card">
+        <div class="dor-icon">🔥</div>
+        <h3>Você apaga incêndio todo dia</h3>
+        <p>Sem processo, sem previsibilidade. Cada semana uma surpresa nova. Você virou o bombeiro do time.</p>
       </div>
-      <div class="pain-card">
-        <div class="pain-icon">📅</div>
-        <h3>1:1s que não servem para nada</h3>
-        <p>Reuniões semanais que viram status report. Ninguém resolve problema real. Ninguém cresce.</p>
+      <div class="dor-card">
+        <div class="dor-icon">📉</div>
+        <h3>Débito técnico fora de controle</h3>
+        <p>O código está virando um campo minado. A cada feature nova, algo quebra em outro lugar inesperado.</p>
       </div>
-      <div class="pain-card">
-        <div class="pain-icon">🎯</div>
-        <h3>Entrega inconsistente</h3>
-        <p>Sprint fecha bem quando você está perto. Quando você some, o time trava. O problema é de processo, não de pessoas.</p>
+      <div class="dor-card">
+        <div class="dor-icon">😶</div>
+        <h3>Time desmotivado e reativo</h3>
+        <p>As pessoas fazem o mínimo, não tomam iniciativa, esperam você resolver tudo. Ownership virou palavra vazia.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PARA QUEM -->
-<section class="para-quem">
+<section>
   <div class="section-inner">
-    <div class="section-label">Para quem é</div>
-    <h2 class="section-title">Este e-book foi escrito para você se...</h2>
-
-    <div class="checks">
-      <div class="check-item">
-        <span class="check-icon">✓</span>
-        <p>Você é engenheiro sênior que assumiu ou vai assumir uma posição de liderança técnica</p>
-      </div>
-      <div class="check-item">
-        <span class="check-icon">✓</span>
-        <p>Você é tech lead ou staff engineer com responsabilidade sobre um time ou projeto</p>
-      </div>
-      <div class="check-item">
-        <span class="check-icon">✓</span>
-        <p>Você quer delegar mais mas não confia que o time vai entregar no padrão certo</p>
-      </div>
-      <div class="check-item">
-        <span class="check-icon">✓</span>
-        <p>Você dá feedback mas não vê mudança de comportamento depois</p>
-      </div>
-      <div class="check-item">
-        <span class="check-icon">✓</span>
-        <p>Você quer construir um processo de entrega que funcione sem você estar em tudo</p>
-      </div>
-      <div class="check-item">
-        <span class="check-icon">✓</span>
-        <p>Você gerencia engenheiros júnior ou pleno e quer acelerá-los de verdade</p>
-      </div>
+    <h2 class="section-title">Para quem é este livro</h2>
+    <div class="para-quem-grid">
+      <div class="check-item"><span class="check-icon">✓</span><p>Tech leads que assumiram liderança técnica e precisam estruturar o time</p></div>
+      <div class="check-item"><span class="check-icon">✓</span><p>Engenheiros sênior que vão liderar um time pela primeira vez</p></div>
+      <div class="check-item"><span class="check-icon">✓</span><p>Engineering managers que querem entender melhor o lado técnico da liderança</p></div>
+      <div class="check-item"><span class="check-icon">✓</span><p>Devs que perceberam que código bom não é suficiente — time bom é o diferencial</p></div>
+      <div class="check-item"><span class="check-icon">✓</span><p>Líderes técnicos que sentem que estão no controle de tudo mas entregando pouco</p></div>
+      <div class="check-item"><span class="check-icon">✓</span><p>Quem leu "Arquitetura que Sobrevive" e quer ir além da arquitetura</p></div>
     </div>
   </div>
 </section>
 
 <!-- CONTEUDO -->
-<section>
+<section class="content-section" id="conteudo">
   <div class="section-inner">
-    <div class="section-label">Conteúdo</div>
-    <h2 class="section-title">16 capítulos. Do conceito à prática.</h2>
-    <p class="section-desc">
-      Cada capítulo tem um caso real (de sucesso ou fracasso), aplicação direta e um exercício de raciocínio
-      para você pensar na própria situação.
-    </p>
-
+    <h2 class="section-title">O que você vai aprender nos <em>16 capítulos</em></h2>
     <div class="chapters-grid">
-      <div class="chapter-card">
-        <span class="chapter-num">01</span>
-        <div class="chapter-text">
-          <h4>O que é liderança técnica de verdade</h4>
-          <p>A diferença entre ser referência técnica e ser responsável pelo time</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">02</span>
-        <div class="chapter-text">
-          <h4>A transição de IC para liderança</h4>
-          <p>Por que os melhores engenheiros frequentemente travam nessa mudança</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">03</span>
-        <div class="chapter-text">
-          <h4>Delegação com confiança</h4>
-          <p>Como transferir contexto suficiente para que o time decida bem sem você</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">04</span>
-        <div class="chapter-text">
-          <h4>O mapa de autonomia</h4>
-          <p>Calibrar o nível certo de delegação para cada pessoa e cada tipo de tarefa</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">05</span>
-        <div class="chapter-text">
-          <h4>Feedback que gera mudança</h4>
-          <p>A estrutura que faz o feedback ser recebido, processado e agir sobre o comportamento</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">06</span>
-        <div class="chapter-text">
-          <h4>Feedback técnico sem conflito</h4>
-          <p>Como revisar código e apontar problemas sem destruir a relação com o time</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">07</span>
-        <div class="chapter-text">
-          <h4>1:1s que resolvem problemas reais</h4>
-          <p>Estrutura, frequência e perguntas que tornam o 1:1 o encontro mais útil da semana</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">08</span>
-        <div class="chapter-text">
-          <h4>Acelerando engenheiros júnior</h4>
-          <p>O caminho mais rápido para tornar alguém produtivo sem microgerenciar cada passo</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">09</span>
-        <div class="chapter-text">
-          <h4>Cultura de entrega consistente</h4>
-          <p>Como criar rituais e processos que fazem o time entregar mesmo quando você não está presente</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">10</span>
-        <div class="chapter-text">
-          <h4>Definindo padrões técnicos sem autoritarismo</h4>
-          <p>Fazer o time adotar boas práticas por convicção, não por obrigação</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">11</span>
-        <div class="chapter-text">
-          <h4>Estimativas e compromissos</h4>
-          <p>Como construir previsibilidade real sem criar pressão que destrói a qualidade</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">12</span>
-        <div class="chapter-text">
-          <h4>Gerenciando para cima</h4>
-          <p>Comunicar progresso, riscos e decisões técnicas para quem não é engenheiro</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">13</span>
-        <div class="chapter-text">
-          <h4>Conflitos técnicos e tomada de decisão</h4>
-          <p>Resolver impasses sem criar ressentimento e sem deixar o time paralisado</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">14</span>
-        <div class="chapter-text">
-          <h4>Time distribuído e assíncrono</h4>
-          <p>Manter alinhamento e entrega em times remotos sem reunião para tudo</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">15</span>
-        <div class="chapter-text">
-          <h4>Saúde técnica como responsabilidade de liderança</h4>
-          <p>Débito técnico, refatoração e como negociar espaço para manter o sistema saudável</p>
-        </div>
-      </div>
-      <div class="chapter-card">
-        <span class="chapter-num">16</span>
-        <div class="chapter-text">
-          <h4>Construindo a próxima geração de líderes</h4>
-          <p>O legado real de um tech lead: times que funcionam quando você sai</p>
-        </div>
-      </div>
+      <div class="chapter-card"><div class="chapter-num">01</div><h4>O papel do Tech Lead moderno</h4></div>
+      <div class="chapter-card"><div class="chapter-num">02</div><h4>Confiança como fundação do time</h4></div>
+      <div class="chapter-card"><div class="chapter-num">03</div><h4>Comunicação técnica que não vira ruído</h4></div>
+      <div class="chapter-card"><div class="chapter-num">04</div><h4>Rituais que funcionam de verdade</h4></div>
+      <div class="chapter-card"><div class="chapter-num">05</div><h4>Débito técnico: gerenciar, não eliminar</h4></div>
+      <div class="chapter-card"><div class="chapter-num">06</div><h4>Code review como ferramenta cultural</h4></div>
+      <div class="chapter-card"><div class="chapter-num">07</div><h4>Onboarding que acelera produtividade</h4></div>
+      <div class="chapter-card"><div class="chapter-num">08</div><h4>Gestão de incidentes sem desespero</h4></div>
+      <div class="chapter-card"><div class="chapter-num">09</div><h4>Estimativas que o negócio pode confiar</h4></div>
+      <div class="chapter-card"><div class="chapter-num">10</div><h4>Decisões técnicas em grupo sem travar</h4></div>
+      <div class="chapter-card"><div class="chapter-num">11</div><h4>Relacionamento com produto e negócio</h4></div>
+      <div class="chapter-card"><div class="chapter-num">12</div><h4>Times distribuídos: distância não é desculpa</h4></div>
+      <div class="chapter-card"><div class="chapter-num">13</div><h4>Métricas de engenharia que importam</h4></div>
+      <div class="chapter-card"><div class="chapter-num">14</div><h4>Crescimento individual dentro do time</h4></div>
+      <div class="chapter-card"><div class="chapter-num">15</div><h4>Cultura de entrega contínua</h4></div>
+      <div class="chapter-card"><div class="chapter-num">16</div><h4>Escalando o time sem perder qualidade</h4></div>
     </div>
   </div>
 </section>
 
 <!-- O QUE MUDA -->
-<section class="benefits">
+<section>
   <div class="section-inner">
-    <div class="section-label">O que muda</div>
-    <h2 class="section-title">Depois de ler, você vai conseguir fazer coisas que hoje travam.</h2>
-
-    <div class="benefits-grid">
-      <div class="benefit-card">
-        <div class="benefit-dot">🚀</div>
-        <h3>Delegar sem ansiedade</h3>
-        <p>Você vai ter um processo para transferir contexto e acompanhar entrega sem precisar refazer o trabalho depois.</p>
+    <h2 class="section-title">O que muda depois que você lê</h2>
+    <div class="beneficios-grid">
+      <div class="beneficio-card">
+        <div class="b-icon">🎯</div>
+        <h3>Você para de microgerenciar</h3>
+        <p>Aprende a criar estruturas que fazem o time se mover sozinho, sem precisar de você em toda decisão.</p>
       </div>
-      <div class="benefit-card">
-        <div class="benefit-dot">💬</div>
-        <h3>Dar feedback que funciona</h3>
-        <p>A pessoa vai sair da conversa sabendo exatamente o que mudar — e vai mudar, porque entendeu o porquê.</p>
+      <div class="beneficio-card">
+        <div class="b-icon">📦</div>
+        <h3>Entregas viram rotina, não exceção</h3>
+        <p>Com os rituais certos e processo definido, o time começa a entregar com consistência e previsibilidade.</p>
       </div>
-      <div class="benefit-card">
-        <div class="benefit-dot">🔄</div>
-        <h3>Times que entregam sem você</h3>
-        <p>Você vai criar rituais e processos que mantêm o time produtivo quando você está em reunião, de férias ou offline.</p>
+      <div class="beneficio-card">
+        <div class="b-icon">🤝</div>
+        <h3>O time toma ownership de verdade</h3>
+        <p>As pessoas passam a sentir que o projeto é delas. Iniciativa, responsabilidade e orgulho voltam a aparecer.</p>
       </div>
-      <div class="benefit-card">
-        <div class="benefit-dot">📈</div>
-        <h3>Engenheiros crescendo de verdade</h3>
-        <p>Você vai saber como estruturar o crescimento de cada pessoa — de júnior a sênior — com critérios claros.</p>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-dot">🧭</div>
-        <h3>Decisões técnicas com consenso</h3>
-        <p>Você vai resolver impasses técnicos sem autoritarismo e sem deixar o time paralisado esperando sua palavra.</p>
+      <div class="beneficio-card">
+        <div class="b-icon">🧭</div>
+        <h3>Decisões técnicas ficam mais fáceis</h3>
+        <p>Você tem frameworks práticos para tomar e comunicar decisões difíceis sem gerar conflito ou paralisia.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CITAÇÃO -->
+<!-- QUOTE -->
 <section class="quote-section">
-  <div class="section-inner quote-inner">
-    <div class="quote-mark">"</div>
+  <div class="section-inner">
     <blockquote>
-      O sinal de que você se tornou um líder técnico de verdade não é o seu código melhorou.
-      É que <em>o código do time melhorou</em> — mesmo nos dias em que você não tocou em nada.
+      <p>"Um time de engenharia que entrega não é acidente. É o resultado de um ambiente onde confiança, clareza e responsabilidade foram construídas deliberadamente — e isso começa no Tech Lead."</p>
+      <cite>— Times que Entregam: Liderança Técnica, cap. 2</cite>
     </blockquote>
-    <p class="quote-source">— Times que Entregam: Liderança Técnica, Cap. 16</p>
   </div>
 </section>
 
 <!-- AUTOR -->
 <section>
-  <div class="section-inner" style="text-align:center">
-    <div class="section-label">O autor</div>
-    <h2 class="section-title">Escrito por quem viveu o problema.</h2>
-
+  <div class="section-inner">
+    <h2 class="section-title">Sobre o autor</h2>
     <div class="autor-card">
-      <div class="autor-avatar">👨‍💻</div>
+      <div class="autor-avatar">FR</div>
       <div class="autor-info">
-        <h3>Felipe Ricarte Magalhães</h3>
-        <div class="autor-role">Engenheiro de Software · Autor da série "Times que Entregam"</div>
-        <p>
-          Engenheiro com experiência em times de produto de alta performance. Já passou pela transição
-          de IC para liderança técnica e conhece de perto os erros que ninguém fala em público.
-          Escreveu este e-book para dar a outros líderes técnicos o mapa que ele gostaria de ter
-          tido quando precisou.
-        </p>
+        <h3>Felipe Ricarte</h3>
+        <div class="autor-role">Tech Lead &nbsp;·&nbsp; Arquiteto de Software</div>
+        <p class="autor-bio">Profissional com experiência em liderar times de engenharia em produtos digitais. Já passou pela transição de engenheiro para líder técnico e sabe exatamente onde estão as armadilhas. Escreve sobre arquitetura de software, liderança técnica e como construir times que entregam de verdade — sem burnout e sem achismo.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section class="pricing">
+<section class="pricing-section">
   <div class="section-inner">
-    <div class="section-label">Investimento</div>
-    <h2 class="section-title">Menos que um livro importado.<br>Mais aplicável que qualquer curso.</h2>
-
-    <div class="price-card">
-      <span class="price-badge">Acesso imediato</span>
-
-      <div class="price-value">
-        <span>R$</span>97
+    <h2 class="section-title">Invista no seu time. <em>Agora.</em></h2>
+    <div class="pricing-card">
+      <div class="pricing-label">Acesso completo ao e-book</div>
+      <div class="pricing-price"><span>R$</span>97</div>
+      <p class="pricing-desc">Pagamento único. Sem assinatura. Acesso imediato.</p>
+      <div class="pricing-includes">
+        <h4>O que está incluso</h4>
+        <div class="include-item"><span class="ic">✓</span> E-book completo em PDF (16 capítulos)</div>
+        <div class="include-item"><span class="ic">✓</span> Casos reais de times de software</div>
+        <div class="include-item"><span class="ic">✓</span> Exercícios práticos ao final de cada capítulo</div>
+        <div class="include-item"><span class="ic">✓</span> Frameworks de decisão reutilizáveis</div>
+        <div class="include-item"><span class="ic">✓</span> Acesso imediato após a compra</div>
       </div>
-      <p class="price-desc">Pagamento único · Sem mensalidade</p>
-
-      <ul class="price-includes">
-        <li>E-book completo em PDF (16 capítulos)</li>
-        <li>Casos reais de sucesso e fracasso em cada capítulo</li>
-        <li>Exercícios práticos para aplicar no seu time</li>
-        <li>Acesso imediato após o pagamento</li>
-        <li>Atualizações futuras sem custo adicional</li>
-      </ul>
-
-      <a href="https://pay.kiwify.com.br/yl8FmU0" class="cta-price" target="_blank">
-        Quero o e-book agora — R$97 →
-      </a>
-
-      <p class="garantia">🔒 Pagamento seguro via Kiwify · Cartão, Pix ou boleto</p>
+      <a href="https://pay.kiwify.com.br/yl8FmU0" class="cta-primary" target="_blank">Quero o livro por R$97 →</a>
+      <p class="guarantee">🔒 Compra 100% segura via Kiwify</p>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>
-    © 2026 Felipe Ricarte Magalhães · Todos os direitos reservados<br>
-    <a href="mailto:felipericartem@gmail.com">felipericartem@gmail.com</a>
-  </p>
+  <p>© 2024 Felipe Ricarte &nbsp;·&nbsp; <a href="mailto:felipericartem@gmail.com">felipericartem@gmail.com</a></p>
+  <p style="margin-top:6px;">Série Times que Entregam</p>
 </footer>
 
 </body>
